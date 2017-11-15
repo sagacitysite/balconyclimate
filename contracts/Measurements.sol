@@ -13,6 +13,7 @@ contract Measurements {
     // the addresses
     uint num_addresses;
     address[] addresses;
+    mapping (address => bool) addressExists;
     
     // mapping to index by id
 	mapping (address => uint) num_indices_by_id;
@@ -33,6 +34,12 @@ contract Measurements {
 		
 		var idx = num_measurements++;
 		measurements.push(measurement);
+
+		if(!addressExists[id]) {
+			addressExists[id] = true;
+			addresses.push(id);
+			++num_addresses;
+		}
 		
 		indices_by_id[id].push(idx);
 		++num_indices_by_id[id];

@@ -1,17 +1,15 @@
 var _ = require("lodash");
-var $ = require("jquery");
-var angular = require("angular");
 var Promise = require("bluebird");
 
 var config = require('./'+process.argv[2]);
 
-import { default as contract } from 'truffle-contract'
-import measurements_artifacts from '../build/contracts/Measurements.json'
+//import { default as contract } from 'truffle-contract'
+//import measurements_artifacts from '../build/contracts/Measurements.json'
+var contract = require('truffle-contract');
+var measurement_artifacts = require('./build/contracts/Measurements.json');
 var Measurements = contract(measurements_artifacts);
 
 var BrowserWallet = require("./browser_wallet");
-//var rpcAddress = "http://localhost:8546";
-var rpcAddress = "http://192.168.1.10:8546";
 var browserWallet = new BrowserWallet(config.rpcAddress, config.privateKeyString, false);
 
 Measurements.setProvider(browserWallet.web3.currentProvider);
@@ -30,7 +28,7 @@ sensor
     .setReportingMode('active')
     .then(() => {
         console.log("Sensor is now working in active mode.");
-        return sensor.setWorkingPeriod(0); // Sensor will send data as soon as new data is available.
+        return sensor.setWorkingPeriod(60000); // Sensor will send data as soon as new data is available.
     })
     .then(() => {
         console.log("Working period set to 0 minutes.");
@@ -83,8 +81,7 @@ sensor
             
             // write to smart contract
             measurementsPromise.then(function(measurements) {
-                browserWallet.callContractMethodAsync(measurements.push, myObjPM);
+                browserWallet.callContractMethodAsync(measurements.push, JSON.stringify(myObjPM));
             });
         });
     });
-

@@ -58,13 +58,10 @@ function getListAsync(listPromise,
 }
 
 function mapMeasurement(m) {
-    return Promise.resolve(m);
-  /*return Promise.props({
-    assessment: e[0].toNumber(),
-    comment: e[1]
-  });*/
+    return Promise.resolve(JSON.parse(m));
 }
 
+var onlyBlockchain  = false;
 app.get('/last', function(req, res) {
     var externalsQueryPromise =
         rp('http://api.luftdaten.info/static/v1/data.json').
@@ -72,8 +69,16 @@ app.get('/last', function(req, res) {
     var blockchainQueryPromise =
         getListAsync(measurementsPromise, 'getNumLast', 'getLast',
                      mapMeasurement);
-
-    externalsQueryPromise.then(res.send.bind(res));
+    
+    if(onlyBlockchain) {
+        blockchainQueryPromise.then(res.send.bind(res));
+    } else {
+        Promise.join(externalsQueryPromise, blockchainQueryPromise).
+            spread(function (externals, blockchain) {
+                console.log(blockchain);
+               res.send(externals.concat(blockchain)); 
+            });
+    }
 });
 
 app.get('/history/:id', function(req, res) {
