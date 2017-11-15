@@ -17,6 +17,8 @@ body { position: relative; }
 }
 
 #panel hr { margin-top: 1rem; }
+#panel .pp { font-size: 2rem; }
+#panel .ok { color: #66BB6A; }
 .barplots h2 { text-transform: capitalize; }
 
 /*.sensor-icon .fa { color: #3F51B5; text-shadow: 0 0 2px rgba(0,0,0,0.5); }*/

@@ -15,8 +15,8 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 
 // Get data and show markers
 data_promise = new Promise(function (resolve, reject) {
-	//$.get("http://192.168.1.10:3000/last", resolve, "json");
-	$.get("http://api.luftdaten.info/static/v1/data.json", resolve, "json");
+	$.get("http://192.168.1.10:3000/last", resolve, "json");
+	//$.get("http://api.luftdaten.info/static/v1/data.json", resolve, "json");
 });
 
 data_promise.then(setMarkers);
@@ -91,33 +91,50 @@ function openPanel(sensorId, transition) {
 		
 	});*/
 	
-	timeseries_promise.then(function(s) {
-		// Set sensor meta values
-		$('#panel .location').text(s.location.latitude+', '+s.location.longitude);
-		$('#panel .id').text(s.id);
-		$('#panel .type').text(s.sensor.sensor_type.name);
-		$('#panel .lasttime').text(s.timestamp);
-		
-		// Remove meta data and prepare time
-		var timeseries = _.map(s.measures, function(m) {
-			// Get hour from time
-			m.hour = moment(m.timestamp, 'YYYY-MM-DD HH:mm:ss').hour();
-			return m;
-		});
-		
-		// Remove multi value
-		// OPTIONAL TODO average instead of removing
-		timeseries = _.uniq(timeseries, function (item) { return item.timestamp; });
-		
-		// Find types
-		var types = _.pluck(timeseries[0].sensordatavalues, 'value_type');
-		
-		// Show panel
-		if(transition == 'fade')
-			$('#panel').fadeTo(500, 1, drawPlot.bind(drawPlot, timeseries, types))
-		else
-			$('#panel').animate({ "width": "40%", "opacity": "0.9" }, 300,
-							drawPlot.bind(drawPlot, timeseries, types));
+	Promise.join(data_promise, timeseries_promise).spread(function(sensorSingle, s) {
+		if(sensorId == 484914423) {
+			d = _.findWhere(sensorSingle, {id: sensorId});
+			console.log(d);
+			
+			$('#panel .location').text(d.location.latitude+', '+d.location.longitude);
+			$('#panel .id').text(d.id);
+			$('#panel .type').text(d.sensor.sensor_type.name);
+			$('#panel .lasttime').text(d.timestamp);
+			
+			$('#panel .barplots').html('<p class="pp">P1: <strong class="ok">'+d.sensordatavalues[0].value+'</strong> &micro;g/m&sup3;</p><p class="pp">P2: <strong class="ok">'+d.sensordatavalues[1].value+'</strong> &micro;g/m&sup3;</p>');
+			
+			if(transition == 'fade')
+				$('#panel').fadeTo(500, 1);
+			else
+				$('#panel').animate({ "width": "40%", "opacity": "0.9" }, 300);
+		} else {
+			// Set sensor meta values
+			$('#panel .location').text(s.location.latitude+', '+s.location.longitude);
+			$('#panel .id').text(s.id);
+			$('#panel .type').text(s.sensor.sensor_type.name);
+			$('#panel .lasttime').text(s.timestamp);
+
+			// Remove meta data and prepare time
+			var timeseries = _.map(s.measures, function(m) {
+				// Get hour from time
+				m.hour = moment(m.timestamp, 'YYYY-MM-DD HH:mm:ss').hour();
+				return m;
+			});
+
+			// Remove multi value
+			// OPTIONAL TODO average instead of removing
+			timeseries = _.uniq(timeseries, function (item) { return item.timestamp; });
+
+			// Find types
+			var types = _.pluck(timeseries[0].sensordatavalues, 'value_type');
+
+			// Show panel
+			if(transition == 'fade')
+				$('#panel').fadeTo(500, 1, drawPlot.bind(drawPlot, timeseries, types))
+			else
+				$('#panel').animate({ "width": "40%", "opacity": "0.9" }, 300,
+								drawPlot.bind(drawPlot, timeseries, types));
+		}
 	});
 }
 
