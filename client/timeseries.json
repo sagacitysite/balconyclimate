@@ -1,0 +1,142 @@
+{
+	"id": 484729634,
+	"sampling_rate": null,
+	"timestamp": "2017-11-14 22:49:02",
+	"location": {
+		"id": 2648,
+		"latitude": "52.507",
+		"longitude": "13.320",
+		"country": "DE"
+	},
+	"sensor": {
+		"id": 5252,
+		"pin": "7",
+		"sensor_type": {
+			"id": 9,
+			"name": "DHT22",
+			"manufacturer": "various"
+		}
+	},
+	"measures": [
+		{
+			"timestamp": "2017-11-14 17:06:02",
+			"sensordatavalues": [{
+				"id": 1068865727,
+				"value": "7.50",
+				"value_type": "temperature"
+			}, {
+				"id": 1068865728,
+				"value": "73.40",
+				"value_type": "humidity"
+			}]
+		},
+		{
+			"timestamp": "2017-11-14 17:55:02",
+			"sensordatavalues": [{
+				"id": 1068865727,
+				"value": "7.30",
+				"value_type": "temperature"
+			}, {
+				"id": 1068865728,
+				"value": "75.40",
+				"value_type": "humidity"
+			}]
+		},
+		{
+			"timestamp": "2017-11-14 18:02:02",
+			"sensordatavalues": [{
+				"id": 1068865727,
+				"value": "7.10",
+				"value_type": "temperature"
+			}, {
+				"id": 1068865728,
+				"value": "73.90",
+				"value_type": "humidity"
+			}]
+		},
+		{
+			"timestamp": "2017-11-14 19:06:02",
+			"sensordatavalues": [{
+				"id": 1068865727,
+				"value": "6.70",
+				"value_type": "temperature"
+			}, {
+				"id": 1068865728,
+				"value": "76.90",
+				"value_type": "humidity"
+			}]
+		},
+		{
+			"timestamp": "2017-11-14 19:32:02",
+			"sensordatavalues": [{
+				"id": 1068865727,
+				"value": "6.80",
+				"value_type": "temperature"
+			}, {
+				"id": 1068865728,
+				"value": "79.40",
+				"value_type": "humidity"
+			}]
+		},
+		{
+			"timestamp": "2017-11-14 20:21:02",
+			"sensordatavalues": [{
+				"id": 1068865727,
+				"value": "5.20",
+				"value_type": "temperature"
+			}, {
+				"id": 1068865728,
+				"value": "79.90",
+				"value_type": "humidity"
+			}]
+		},
+		{
+			"timestamp": "2017-11-14 20:58:02",
+			"sensordatavalues": [{
+				"id": 1068865727,
+				"value": "4.70",
+				"value_type": "temperature"
+			}, {
+				"id": 1068865728,
+				"value": "80.00",
+				"value_type": "humidity"
+			}]
+		},
+		{
+			"timestamp": "2017-11-14 21:33:02",
+			"sensordatavalues": [{
+				"id": 1068865727,
+				"value": "4.00",
+				"value_type": "temperature"
+			}, {
+				"id": 1068865728,
+				"value": "79.50",
+				"value_type": "humidity"
+			}]
+		},
+		{
+			"timestamp": "2017-11-14 22:15:02",
+			"sensordatavalues": [{
+				"id": 1068865727,
+				"value": "3.50",
+				"value_type": "temperature"
+			}, {
+				"id": 1068865728,
+				"value": "79.40",
+				"value_type": "humidity"
+			}]
+		},
+		{
+			"timestamp": "2017-11-14 22:49:02",
+			"sensordatavalues": [{
+				"id": 1068865727,
+				"value": "3.60",
+				"value_type": "temperature"
+			}, {
+				"id": 1068865728,
+				"value": "80.50",
+				"value_type": "humidity"
+			}]
+		}
+	]
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Balcony Climate</title>
+	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+	<link rel="stylesheet" href="lib/leaflet/markercluster/leaflet.markercluster.css" />
+	<link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css" />
+	<link rel="stylesheet" href="lib/bootstrap/bootstrap-material-design.min.css" />
+	<link rel="stylesheet" href="lib/bootstrap/ripples.min.css" />
+	<link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
+	
+	<script src="lib/jquery-3.2.1.min.js"></script>
+	<script src="lib/underscore-min.js"></script>
+	<script src="lib/vue.min.js"></script>
+	<script src="lib/leaflet/leaflet.js"></script>
+	<script src="lib/leaflet/markercluster/leaflet.markercluster.js"></script>
+	<script src="lib/d3.min.js"></script>
+	<script src="lib/bootstrap/bootstrap.min.js"></script>
+	<script src="lib/bootstrap/material.min.js"></script>
+	<script src="lib/bootstrap/ripples.min.js"></script>
+	<script src="lib/bluebird-3.5.0.min.js"></script>
+	<script src="lib/moment.min.js"></script>
+	
+	<link rel="stylesheet" href="app.css" />
+</head>
+<body>
+	<div id="map"></div>
+	<div id="panel">
+		<h1 class="location"></h1>
+		<div>ID: <span class="id"></span>, Type: <span class="type"></span>, Last active: <span class="lasttime"></span></div>
+		<hr/>
+		<div class="barplots"></div>
+	</div>
+	<div id="loading">
+		<div class="spinner">
+			<div class="bounce1"></div>
+			<div class="bounce2"></div>
+			<div class="bounce3"></div>
+		</div>
+	</div>
+	
+	<script src="app.js"></script>
+</body>
+</html>
